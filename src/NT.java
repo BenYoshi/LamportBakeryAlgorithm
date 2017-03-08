@@ -2,7 +2,7 @@
  * Created by Benny on 3/5/2017.
  */
 public class NT implements Runnable {
-    private static int id = 0;
+    private int id = 0;
     private static boolean choosingAdd[] = new boolean[10];
     private static int ticketAdd[] = new int[10];
     private static boolean choosingMult[] = new boolean[10];
@@ -62,7 +62,7 @@ public class NT implements Runnable {
 
         // critical section start
         doubler *= 2;
-        System.out.println("Thread " + NT.id + " x * 2 = " + doubler);
+        System.out.println("Thread " + id + " x * 2 = " + doubler);
         // end
 
         ticketMult[id] = 0;
