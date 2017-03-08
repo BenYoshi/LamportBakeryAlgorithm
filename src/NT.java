@@ -19,44 +19,41 @@ public class NT implements Runnable {
     @Override
     public void run() {
         increment();
+        while (counter < 10){doNothing();}
         doubleDown();
     }
 
     private void increment() {
-        choosingAdd[id] = true;
         ticketAdd[id] = id + 1;
-        choosingAdd[id] = false;
+        choosingAdd[id] = true;
 
         for (int i = 0; i < 10; i++) {
             if (i == id)
                 continue;
-            while (choosingAdd[i]);
-            while (ticketAdd[i] != 0 && ticketAdd[i] < ticketAdd[id]);
+            while (choosingAdd[i]){doNothing();}
+            while (ticketAdd[i] != 0 && ticketAdd[i] < ticketAdd[id]){doNothing();}
             if (ticketAdd[i] == ticketAdd[id] && i < id) {
-                while (ticketAdd[i] != 0);
+                while (ticketAdd[i] != 0){doNothing();}
             }
         }
 
         // critical section start
         counter++;
         System.out.println("Thread " + id + ": counter + 1 = " + counter);
-        while (counter < 10);
-        // end
-
         ticketAdd[id] = 0;
+        // end
     }
     private void doubleDown() {
-        choosingMult[id] = true;
         ticketMult[id] = id + 1;
-        choosingMult[id] = false;
+        choosingMult[id] = true;
 
         for (int i = 0; i < 10; i++) {
             if (i == id)
                 continue;
-            while (choosingMult[i]);
-            while (ticketMult[i] != 0 && ticketMult[i] < ticketMult[id]);
+            while (choosingMult[i]){doNothing();}
+            while (ticketMult[i] != 0 && ticketMult[i] < ticketMult[id]){doNothing();}
             if (ticketMult[i] == ticketMult[id] && i < id) {
-                while (ticketMult[i] != 0);
+                while (ticketMult[i] != 0){doNothing();}
             }
         }
 
@@ -66,5 +63,8 @@ public class NT implements Runnable {
         // end
 
         ticketMult[id] = 0;
+    }
+    private void doNothing(){
+        System.out.print("");
     }
 }
