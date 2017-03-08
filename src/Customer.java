@@ -28,20 +28,19 @@ public class Customer implements Runnable {
         for (int i = 0; i < 10; i++) {
             if (i == id)
                 continue;
-            while (choosingChair[i]) ;
-            while (ticketChair[i] != 0 && ticketChair[i] < ticketChair[id]) ;
+            while (choosingChair[i]){doNothing();}
+            while (ticketChair[i] != 0 && ticketChair[i] < ticketChair[id]){doNothing();}
             if (ticketChair[i] == ticketChair[id] && i < id) {
-                while (ticketChair[i] != 0) ;
+                while (ticketChair[i] != 0){doNothing();}
             }
         }
 
         // critical section
-        while (!Chair.isAvailable()) ;
+        while (!Chair.isAvailable()){doNothing();}
         Chair.occupy();
         System.out.println(this.id + " found an open chair, there are " + Chair.available() + " open chairs left.");
-        // end
-
         ticketChair[id] = 0;
+        // end
     }
 
     private void findABarber() {
@@ -52,27 +51,30 @@ public class Customer implements Runnable {
         for (int i = 0; i < 10; i++) {
             if (i == id)
                 continue;
-            while (choosingBarber[i]) ;
-            while (ticketBarber[i] != 0 && ticketBarber[i] < ticketBarber[id]) ;
+            while (choosingBarber[i]){doNothing();}
+            while (ticketBarber[i] != 0 && ticketBarber[i] < ticketBarber[id]){doNothing();}
             if (ticketBarber[i] == ticketBarber[id] && i < id) {
-                while (ticketBarber[i] != 0) ;
+                while (ticketBarber[i] != 0){doNothing();}
             }
         }
 
         //critical section
-        while (!Barber.isAvailable()) ;
+        while (!Barber.isAvailable()){doNothing();}
         Barber.giveHaircut();
         System.out.println(this.id + " now has a barber, there are  " + Barber.available() + " available barbers.");
         leaveBarberShop();
-        //end
-
         ticketBarber[id] = 0;
+        //end
     }
 
     private void leaveBarberShop() {
         Chair.leave();
         Barber.leave();
         System.out.println(this.id + " has left the barber shop.");
+    }
+    
+    private void doNothing() {
+        System.out.print("");
     }
 }
 
